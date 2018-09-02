@@ -1,0 +1,43 @@
+<div class="examplez">
+<!--     <li *ngFor="let movie of moviesCards | orderBy : ['title_year', 'country', 'content_rating']">{{movie.movie.title_year}} {{movie.movie.country}}, {{movie.movie.content_rating}}</li> -->
+<!--   <table>
+  <thead>
+    <tr>
+      <th><a href (click)="sortTable('movie')">Movie</a></th>
+      <th><a href (click)="sortTable('domain')">Domain</a></th>
+      <th><a href (click)="sortTable('info.country')">Country</a></th>
+      <th><a href (click)="sortTable('info.cash')">Cash</a></th>
+    </tr>
+  </thead>
+</table> -->
+  <mat-grid-list cols="2" rowHeight="360px">
+    <mat-grid-tile *ngFor="let movie of moviesCards" [colspan]="movie.cols" [rowspan]="movie.rows" [style.background]="movie.color">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{movie.movie.movie_title}}</mat-card-title>
+          <mat-card-subtitle>By {{movie.movie.director_name}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Main actors: {{movie.movie.actor_1_name}} & {{movie.movie.actor_2_name}}
+            <!-- <br> Generes: {{movie.movie.genres}} -->
+            <br> Languages: {{movie.movie.language}}
+            <br> Country: {{movie.movie.country}}
+            <br> Rating: {{movie.movie.content_rating}}
+            <br> Year: {{movie.movie.title_year}}
+            <br> Budget: {{movie.movie.budget}}
+            <!-- <br> Keywords: {{movie.movie.plot_keywords}} -->
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="openIMDBPage(movie.movie.movie_imdb_link)" align="center">See On Imdb</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-tile-footer>
+    <mat-paginator #paginator *ngIf="moviesCards" [length]="totalMoviesCards.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="getUpdate($event)">
+    </mat-paginator>
+  </mat-grid-tile-footer>
+</div>
